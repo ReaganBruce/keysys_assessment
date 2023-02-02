@@ -1,38 +1,26 @@
-import React, { useEffect, useState  } from 'react'
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-const Invoices = () => {
-  const [invoicesData, setInvoicesData] = useState([])
 
-  useEffect(() => {
-    fetch('/api/invoices')
-    .then((res) => res.json())
-    .then((invoiceData => setInvoicesData(invoiceData)))
-  }, [])
+//Component imports
+import Nav from './components/Nav.js'
+import Home from './components/Home.js'
+import Invoices from './components/Invoices.js'
 
-  return (
-    <>
-      {invoicesData.map((invoice) => (
-        <p>{invoice['ns3:InvoiceTypeCode']}
-          {invoice['ns3:InvoiceTypeDescription']}
-          {invoice['ns3:CategoryID']}
-          {invoice['ns3:CategoryDescription']}
-          {invoice['ns3:SubCategoryID']}
-          {invoice['ns3:SubCategoryDescription']}
-        </p>
-      ))}
-    </>
+const App = () => {
+return (
+  <Router>
+    <Nav />
+    <Routes>
+    <Route path="/" 
+          element={<Home />}>
+      </Route>
+      <Route path="/Invoices" 
+          element={<Invoices />}>
+      </Route>
+    </Routes>
+  </Router>
   )
-
 }
 
-
-/*
-InvoiceTypeCode
-InvoiceTypeDescription
-CategoryId
-CategoryDescription
-SubCategoryId
-SubCategoryDescription
-*/
-
-export default Invoices
+export default App;
