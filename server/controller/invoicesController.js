@@ -18,7 +18,7 @@ const getInvoiceId = (req, res) => {
   const invoiceId = req.params.id; //object ID
   const invoice = Object.assign({}, invoices[invoiceId - 1]); //-1 to get the Id's synced to the correct index
   try {
-    res.send(invoice);
+    res.status(200).send(invoice);
   } catch (err) {
     res.status(404).json({
       Status: 404,
@@ -31,11 +31,11 @@ const getInvoiceCodeJudicial = (req, res) => {
   const judicialArray = [];
   invoices.map((invoice) => {
     if (invoice["ns3:InvoiceTypeCode"] == 807) {
-      judicialArray.push({ ...invoice }); //spread object body with 808 to new array
+      judicialArray.push({ ...invoice }); //spread object body with 807 to new array
     }
   });
   try {
-    res.send(judicialArray);
+    res.status(200).send(judicialArray);
   } catch (err) {
     res.status(404).json({
       Status: 404,
@@ -49,11 +49,11 @@ const getInvoiceCodeNonJudicial = (req, res) => {
   const nonJudicialArray = [];
   invoices.map((invoice) => {
     if (invoice["ns3:InvoiceTypeCode"] == 808) {
-      nonJudicialArray.push({ ...invoice }); //spread body with 807 to new array
+      nonJudicialArray.push({ ...invoice }); //spread body with 808 to new array
     }
   });
   try {
-    res.send(nonJudicialArray);
+    res.status(200).send(nonJudicialArray);
   } catch (err) {
     res.status(404).json({
       Status: 404,
