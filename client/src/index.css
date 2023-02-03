@@ -1,3 +1,7 @@
 body {
     background-color: rgb(127, 146, 152);
 }
+
+#number-field {
+    cursor:pointer
+}

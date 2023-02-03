@@ -6,6 +6,7 @@ const app = express()
 
 app.use(express.json())
 
+//route middleware
 app.use(routes)
 
 

@@ -1,0 +1,2 @@
+- Converted Excel document to .JSON file via Node's filesystem module.
+- Created function to add an "InvoiceId" value to reference in the front end.
