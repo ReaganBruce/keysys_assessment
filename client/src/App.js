@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-//Component imports
+//Component and View imports
 import Nav from "./components/Nav.js";
-import Home from "./components/Home.js";
-import Invoices from "./components/Invoices.js";
-
+import Home from "./views/Home.js";
+import Invoices from "./views/Invoices.js";
+import Judicial from "./views/Judicial.js";
+import NonJudicial from "./views/NonJudicial.js";
 
 const App = () => {
   return (
@@ -14,6 +15,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/invoices" element={<Invoices />}></Route>
+        <Route path="/judicial" element={<Judicial />}></Route>
+        <Route path="/nonjudicial" element={<NonJudicial />}></Route>
       </Routes>
     </Router>
   );

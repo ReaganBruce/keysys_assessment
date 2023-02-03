@@ -1,10 +1,5 @@
 import invoices from "../data/invoiceData.json" assert { type: "json" };
 
-const getInvoice = (id) => {
-  return Object.assign({}, invoices[id]);
-};
-
-
 const getAllInvoices = (req, res) => {
   try {
     res.status(200).send(invoices);
@@ -21,7 +16,7 @@ const getAllInvoices = (req, res) => {
 //to view the API, go to localhost:3000/api/invoices/:id
 const getInvoiceId = (req, res) => {
   const invoiceId = req.params.id; //object ID
-  const invoice = getInvoice(invoiceId - 1); //-1 to get the Id's synced to the correct index
+  const invoice = Object.assign({}, invoices[invoiceId - 1]); //-1 to get the Id's synced to the correct index
   try {
     res.send(invoice);
   } catch (err) {
@@ -32,7 +27,45 @@ const getInvoiceId = (req, res) => {
   }
 };
 
+const getInvoiceCodeJudicial = (req, res) => {
+  const judicialArray = [];
+  invoices.map((invoice) => {
+    if (invoice["ns3:InvoiceTypeCode"] == 807) {
+      judicialArray.push({ ...invoice }); //spread object body with 808 to new array
+    }
+  });
+  try {
+    res.send(judicialArray);
+  } catch (err) {
+    res.status(404).json({
+      Status: 404,
+      Message: "Invoices not found",
+    });
+    console.log(err);
+  }
+};
+
+const getInvoiceCodeNonJudicial = (req, res) => {
+  const nonJudicialArray = [];
+  invoices.map((invoice) => {
+    if (invoice["ns3:InvoiceTypeCode"] == 808) {
+      nonJudicialArray.push({ ...invoice }); //spread body with 807 to new array
+    }
+  });
+  try {
+    res.send(nonJudicialArray);
+  } catch (err) {
+    res.status(404).json({
+      Status: 404,
+      Message: "Invoices not found",
+    });
+    console.log(err);
+  }
+};
+
 export default {
   getAllInvoices,
   getInvoiceId,
+  getInvoiceCodeJudicial,
+  getInvoiceCodeNonJudicial,
 };

@@ -21,7 +21,19 @@ const Nav = () => {
                 to="/Invoices"
                 className="btn btn-secondary btn-lg btn-block mx-3 mr-4 text-white"
               >
-                Invoices
+                All Invoices
+              </Link>
+              <Link
+                to="/Judicial"
+                className="btn btn-secondary btn-lg btn-block mx-3 mr-4 text-white"
+              >
+                Judicial
+              </Link>
+              <Link
+                to="/NonJudicial"
+                className="btn btn-secondary btn-lg btn-block mx-3 mr-4 text-white"
+              >
+                Non-Judicial
               </Link>
             </li>
           </ul>

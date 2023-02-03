@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 //Imported Components
-import Invoice from "./Invoice";
-import Pagination from "./Pagination";
+import Invoice from "../components/Invoice";
+import Pagination from "../components/Pagination";
 
 const Invoices = () => {
   const [invoiceData, setInvoiceData] = useState([]);
@@ -10,13 +10,15 @@ const Invoices = () => {
   const [invoicesPerPage] = useState(33); //amount per page
 
   useEffect(() => {
-    try {
-      fetch("/api/invoices")
-        .then((res) => res.json())
-        .then((data) => setInvoiceData(data));
-    } catch (err) {
-      console.log(err);
-    }
+    (async () => {
+      try {
+        const res = await fetch("/api/invoices");
+        const data = await res.json();
+        setInvoiceData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
 
   //Current Invoice
@@ -27,7 +29,6 @@ const Invoices = () => {
     indexOfLastInvoice
   );
 
-  //Referring to "paginate" function in Pagination component
   const paginate = (pageNum) => setCurrentPage(pageNum);
 
   return (
